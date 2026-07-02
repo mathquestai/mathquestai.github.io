@@ -1,0 +1,163 @@
+/* =====================================================
+   MathQuest — Estilos Globais
+   ===================================================== */
+@import './variables.css';
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-normal);
+  color: var(--texto-primario);
+  background-color: var(--fundo-tela);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--fundo-tela); }
+::-webkit-scrollbar-thumb { background: var(--borda-dourada-esc); border-radius: var(--raio-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--borda-dourada); }
+
+/* ── Tipografia ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fonte-titulo);
+  font-weight: var(--peso-bold);
+  line-height: 1.2;
+  color: var(--texto-titulo);
+}
+
+p { line-height: 1.6; color: var(--texto-secundario); }
+button { cursor: pointer; font-family: var(--fonte-corpo); border: none; outline: none; }
+input { font-family: var(--fonte-corpo); outline: none; }
+
+::selection {
+  background: rgba(201, 168, 76, 0.3);
+  color: var(--texto-dourado);
+}
+
+/* ── Componente Base: Painel RPG ── */
+.painel-rpg {
+  background: var(--fundo-card);
+  border: 2px solid var(--borda-dourada-esc);
+  border-radius: var(--raio-md);
+  box-shadow: var(--sombra-painel);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brilho sutil no topo do painel */
+.painel-rpg::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--borda-dourada), transparent);
+  opacity: 0.7;
+}
+
+/* ── Animações ── */
+
+@keyframes fadeEntrar {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes entrarDireita {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes entrarEsquerda {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes escalarEntrar {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulsarBrilho {
+  0%, 100% { box-shadow: var(--sombra-painel); }
+  50%       { box-shadow: var(--sombra-painel), 0 0 24px rgba(201, 168, 76, 0.4); }
+}
+
+@keyframes pulsarAcerto {
+  0%   { box-shadow: var(--sombra-acerto); border-color: rgba(67,160,71,0.4); }
+  50%  { box-shadow: 0 0 40px rgba(67, 160, 71, 0.7); border-color: var(--cor-acerto); }
+  100% { box-shadow: var(--sombra-acerto); border-color: rgba(67,160,71,0.4); }
+}
+
+@keyframes pulsarErro {
+  0%   { box-shadow: var(--sombra-erro); border-color: rgba(229,57,53,0.4); }
+  50%  { box-shadow: 0 0 40px rgba(229, 57, 53, 0.7); border-color: var(--cor-erro); }
+  100% { box-shadow: var(--sombra-erro); border-color: rgba(229,57,53,0.4); }
+}
+
+@keyframes tremerTela {
+  0%, 100% { transform: translateX(0); }
+  15%  { transform: translateX(-6px) rotate(-0.3deg); }
+  30%  { transform: translateX(6px) rotate(0.3deg); }
+  45%  { transform: translateX(-4px); }
+  60%  { transform: translateX(4px); }
+  75%  { transform: translateX(-2px); }
+  90%  { transform: translateX(2px); }
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes girarDevagar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes piscaNeon {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+@keyframes barraVida {
+  from { width: 100%; }
+}
+
+@keyframes digitarTexto {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* ── Helper Classes ── */
+.animar-entrar    { animation: fadeEntrar 400ms ease both; }
+.animar-direita   { animation: entrarDireita 400ms ease both; }
+.animar-esquerda  { animation: entrarEsquerda 400ms ease both; }
+.animar-escala    { animation: escalarEntrar 350ms cubic-bezier(0.34,1.56,0.64,1) both; }
+.animar-flutuar   { animation: flutuar 3s ease-in-out infinite; }
+.tela-tremer      { animation: tremerTela 450ms ease; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+}

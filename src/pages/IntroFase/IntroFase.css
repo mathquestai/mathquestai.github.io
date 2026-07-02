@@ -1,0 +1,239 @@
+/* IntroFase.css */
+.intro-fase {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--esp-6) var(--esp-6) var(--esp-6);
+  overflow: hidden;
+}
+
+.intro-fase__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(5, 5, 15, 0.55) 0%,
+    rgba(5, 5, 15, 0.3)  40%,
+    rgba(5, 5, 15, 0.75) 100%
+  );
+}
+
+/* ── Título topo ── */
+.intro-fase__titulo-topo {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-1);
+}
+
+.intro-fase__subtitulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--borda-dourada);
+}
+
+.intro-fase__nome-fase {
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  color: var(--texto-titulo);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+  line-height: 1;
+}
+
+/* ── Arena com personagem ── */
+.intro-fase__arena {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  pointer-events: none;
+}
+
+.intro-fase__personagem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.intro-fase__personagem--guardiao {
+  animation: entrarDireita 600ms cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+@keyframes entrarDireita {
+  from { transform: translateX(120px) scale(0.8); opacity: 0; }
+  to   { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+.intro-fase__sprite--guardiao {
+  height: clamp(180px, 32vh, 280px);
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.7));
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+.intro-fase__personagem-info {
+  background: rgba(0,0,0,0.65);
+  border: 2px solid;
+  border-radius: var(--raio-full);
+  padding: var(--esp-2) var(--esp-5);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.intro-fase__personagem-nome {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-lg);
+  font-weight: var(--peso-bold);
+  color: var(--texto-titulo);
+  letter-spacing: 0.05em;
+}
+
+.intro-fase__personagem-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Caixa de diálogo ── */
+.intro-fase__dialogo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  border-radius: var(--raio-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-painel);
+}
+
+.intro-fase__dialogo--guardiao {
+  background: rgba(12, 10, 30, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.intro-fase__dialogo--luna {
+  background: rgba(22, 18, 8, 0.96);
+  border: 2px solid rgba(249, 168, 37, 0.4);
+  box-shadow: var(--sombra-painel), 0 0 20px rgba(249, 168, 37, 0.15);
+}
+
+/* Cabeçalho */
+.intro-fase__dialogo-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--esp-3) var(--esp-4);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.intro-fase__dialogo-personagem {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-bold);
+  color: var(--texto-titulo);
+  letter-spacing: 0.05em;
+}
+
+.intro-fase__dialogo--luna .intro-fase__dialogo-personagem {
+  color: var(--cor-dica);
+}
+
+/* Pontos de progresso */
+.intro-fase__dialogo-passos {
+  display: flex;
+  gap: var(--esp-2);
+}
+
+.intro-fase__dialogo-passo {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background 300ms ease;
+}
+
+/* Texto */
+.intro-fase__dialogo-texto {
+  padding: var(--esp-4) var(--esp-5);
+  font-family: var(--fonte-corpo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-medio);
+  color: var(--texto-primario);
+  line-height: 1.75;
+  min-height: 80px;
+}
+
+.intro-fase__cursor {
+  color: var(--borda-dourada);
+  font-weight: var(--peso-bold);
+  animation: piscaNeon 500ms ease-in-out infinite;
+  margin-left: 2px;
+}
+
+/* Rodapé */
+.intro-fase__dialogo-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--esp-3) var(--esp-4);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  gap: var(--esp-3);
+}
+
+.intro-fase__btn-avancar {
+  flex: 1;
+  background: linear-gradient(135deg, var(--cor-primaria-escura), var(--cor-primaria));
+  color: #fff;
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.05em;
+  padding: var(--esp-3) var(--esp-6);
+  border: 2px solid var(--cor-primaria-clara);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: all var(--trans-base);
+}
+
+.intro-fase__btn-avancar:hover {
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-primaria-clara));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.45);
+}
+
+.intro-fase__btn-voltar {
+  background: transparent;
+  color: var(--texto-muted);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-bold);
+  padding: var(--esp-3) var(--esp-4);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: all var(--trans-base);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.intro-fase__btn-voltar:hover {
+  color: var(--texto-primario);
+  border-color: rgba(255,255,255,0.25);
+}

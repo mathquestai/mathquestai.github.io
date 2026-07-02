@@ -1,0 +1,9 @@
+export { default as HealthBar }         from './HealthBar';
+export { default as CharacterSprite }   from './CharacterSprite';
+export { default as DialogBox }         from './DialogBox';
+export { default as BattleStage }       from './BattleStage';
+export { default as ExibicaoQuestao }   from './ExibicaoQuestao';
+export { default as InputResposta }     from './InputResposta';
+export { default as BolhaDica }         from './BolhaDica';
+export { default as BotaoPedirDica }    from './BotaoPedirDica';
+export { default as TimerCombate }      from './TimerCombate';

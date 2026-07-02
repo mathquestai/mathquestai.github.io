@@ -1,0 +1,138 @@
+/* DialogBox.css */
+.dialogo {
+  background: var(--fundo-card);
+  border: 2px solid var(--borda-dourada-esc);
+  border-radius: var(--raio-md);
+  box-shadow: var(--sombra-dourada);
+  padding: var(--esp-4) var(--esp-5);
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Borda luminosa no topo */
+.dialogo::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--borda-dourada), transparent);
+}
+
+/* Cantos decorativos */
+.dialogo::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: calc(var(--raio-md) - 2px);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  pointer-events: none;
+}
+
+/* ── Variantes ── */
+.dialogo--dica {
+  border-color: var(--cor-dica);
+  box-shadow: var(--sombra-painel), 0 0 16px rgba(249, 168, 37, 0.3);
+  background: linear-gradient(135deg, rgba(30,30,60,0.95), rgba(40,30,10,0.9));
+}
+
+.dialogo--dica::before {
+  background: linear-gradient(90deg, transparent, var(--cor-dica), transparent);
+}
+
+.dialogo--perigo {
+  border-color: var(--cor-erro);
+  box-shadow: var(--sombra-painel), 0 0 16px rgba(229,57,53,0.3);
+}
+
+.dialogo--vitoria {
+  border-color: var(--cor-acerto);
+  box-shadow: var(--sombra-painel), 0 0 20px rgba(67,160,71,0.4);
+  background: linear-gradient(135deg, rgba(20,40,20,0.95), rgba(30,30,60,0.9));
+}
+
+.dialogo--vitoria::before {
+  background: linear-gradient(90deg, transparent, var(--cor-acerto), transparent);
+}
+
+/* ── Cabeçalho ── */
+.dialogo__cabecalho {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin-bottom: var(--esp-3);
+  padding-bottom: var(--esp-3);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.dialogo__icone {
+  font-size: var(--texto-lg);
+  line-height: 1;
+}
+
+.dialogo__nome {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-bold);
+  color: var(--texto-dourado);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.dialogo--dica .dialogo__nome {
+  color: var(--cor-dica);
+}
+
+.dialogo--vitoria .dialogo__nome {
+  color: var(--cor-acerto);
+}
+
+.dialogo__fechar {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--texto-muted);
+  border-radius: var(--raio-sm);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--texto-xs);
+  cursor: pointer;
+  transition: all var(--trans-rapida);
+  flex-shrink: 0;
+}
+
+.dialogo__fechar:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--texto-primario);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* ── Corpo ── */
+.dialogo__corpo {
+  font-family: var(--fonte-corpo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-medio);
+  color: var(--texto-primario);
+  line-height: 1.7;
+}
+
+.dialogo__corpo strong {
+  color: var(--texto-dourado);
+}
+
+.dialogo--dica .dialogo__corpo {
+  color: var(--texto-primario);
+}
+
+/* ── Indicador de continuar ── */
+.dialogo__continuar {
+  position: absolute;
+  bottom: var(--esp-3);
+  right: var(--esp-4);
+  color: var(--borda-dourada);
+  font-size: var(--texto-xs);
+  animation: piscaNeon 1s ease-in-out infinite;
+}

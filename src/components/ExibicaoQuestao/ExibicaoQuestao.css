@@ -1,0 +1,129 @@
+/* ExibicaoQuestao.css */
+.questao {
+  width: 100%;
+  padding: var(--esp-4) var(--esp-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-3);
+  animation: escalarEntrar 350ms cubic-bezier(0.34,1.56,0.64,1) both;
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+
+/* Estados de feedback */
+.questao--correta {
+  border-color: var(--cor-acerto-borda);
+  box-shadow: var(--sombra-painel), var(--sombra-acerto);
+  animation: pulsarAcerto 600ms ease;
+}
+
+.questao--errada {
+  border-color: var(--cor-erro-borda);
+  box-shadow: var(--sombra-painel), var(--sombra-erro);
+  animation: pulsarErro 600ms ease;
+}
+
+/* ── Progresso ── */
+.questao__progresso {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.questao__progresso-barra {
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--raio-full);
+  overflow: hidden;
+}
+
+.questao__progresso-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cor-primaria-clara), var(--borda-dourada));
+  border-radius: var(--raio-full);
+  transition: width 500ms ease;
+}
+
+.questao__progresso-texto {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+  letter-spacing: 0.1em;
+  text-align: right;
+}
+
+/* ── Label ── */
+.questao__label {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--texto-muted);
+}
+
+/* ── Equação ── */
+.questao__eq {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.questao__num {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: var(--peso-bold);
+  color: var(--texto-titulo);
+  text-shadow: 0 0 16px rgba(255, 224, 130, 0.35);
+  line-height: 1;
+}
+
+.questao__op {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: var(--peso-bold);
+  color: var(--borda-dourada);
+  line-height: 1;
+}
+
+.questao__interrogacao {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: var(--peso-extra);
+  color: var(--cor-secundaria-clara);
+  text-shadow: 0 0 20px rgba(245, 124, 0, 0.5);
+  animation: piscaNeon 2s ease-in-out infinite;
+  line-height: 1;
+}
+
+/* Destaque nas questões com feedback */
+.questao--correta .questao__interrogacao { color: var(--cor-acerto); text-shadow: 0 0 16px rgba(67,160,71,0.5); }
+.questao--errada  .questao__interrogacao { color: var(--cor-erro);   text-shadow: 0 0 16px rgba(229,57,53,0.5); }
+
+/* ── Feedback ── */
+.questao__feedback {
+  font-family: var(--fonte-corpo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  border-radius: var(--raio-sm);
+  padding: var(--esp-2) var(--esp-4);
+  animation: escalarEntrar 250ms ease both;
+}
+
+.questao__feedback--correta {
+  color: var(--cor-acerto);
+  background: var(--cor-acerto-bg);
+  border: 1px solid var(--cor-acerto-borda);
+}
+
+.questao__feedback--errada {
+  color: var(--cor-erro);
+  background: var(--cor-erro-bg);
+  border: 1px solid var(--cor-erro-borda);
+}
+
+.questao__feedback--errada strong {
+  color: var(--texto-primario);
+}

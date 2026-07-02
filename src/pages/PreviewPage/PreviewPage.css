@@ -1,0 +1,205 @@
+/* PreviewPage.css */
+
+/* ── Centro da Arena ── */
+.preview__centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-4);
+  width: 100%;
+  max-width: 560px;
+  padding-bottom: var(--esp-2);
+}
+
+/* ── Badge de fase ── */
+.preview__fase-badge {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  letter-spacing: 0.1em;
+  color: var(--texto-dourado);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: var(--raio-full);
+  padding: var(--esp-2) var(--esp-5);
+  text-transform: uppercase;
+}
+
+/* ── Luna com Dica ── */
+.preview__luna-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--esp-3);
+  width: 100%;
+}
+
+.preview__luna-sprite {
+  flex-shrink: 0;
+}
+
+.preview__luna-img {
+  width: 80px;
+  height: 100px;
+}
+
+/* ── Questão ── */
+.preview__questao {
+  width: 100%;
+  padding: var(--esp-5) var(--esp-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.preview__questao-label {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--texto-muted);
+}
+
+.preview__questao-eq {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-5xl);
+  font-weight: var(--peso-bold);
+  color: var(--texto-titulo);
+  text-shadow: 0 0 20px rgba(255, 224, 130, 0.4);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.preview__questao-progresso {
+  font-size: var(--texto-sm);
+  color: var(--texto-secundario);
+  font-weight: var(--peso-medio);
+}
+
+/* ── Input + Botão de ataque ── */
+.preview__input-wrapper {
+  display: flex;
+  gap: var(--esp-3);
+  width: 100%;
+}
+
+.preview__input {
+  flex: 1;
+  background: rgba(10, 10, 25, 0.85);
+  border: 2px solid var(--borda-dourada-esc);
+  border-radius: var(--raio-md);
+  color: var(--texto-primario);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-2xl);
+  font-weight: var(--peso-bold);
+  padding: var(--esp-3) var(--esp-4);
+  text-align: center;
+  transition: border-color var(--trans-base), box-shadow var(--trans-base);
+  min-width: 0;
+}
+
+.preview__input:focus {
+  border-color: var(--borda-dourada);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.3);
+  background: rgba(20, 20, 40, 0.9);
+  outline: none;
+}
+
+/* Remove setas do input number */
+.preview__input::-webkit-outer-spin-button,
+.preview__input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.preview__input[type=number] { -moz-appearance: textfield; }
+
+.preview__btn-atacar {
+  background: linear-gradient(135deg, #2e7d32, #4caf50);
+  color: white;
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.05em;
+  padding: var(--esp-3) var(--esp-6);
+  border-radius: var(--raio-md);
+  border: 2px solid #43a047;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.4);
+  transition: all var(--trans-base);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.preview__btn-atacar:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.5);
+}
+
+.preview__btn-atacar:active {
+  transform: translateY(0);
+}
+
+/* ── Controles de simulação (apenas para validação da Sprint 1) ── */
+.preview__controles {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  padding: var(--esp-3) var(--esp-4);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: var(--raio-md);
+}
+
+.preview__controles-label {
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--fonte-titulo);
+}
+
+.preview__controles-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+}
+
+.preview__btn-sim {
+  padding: var(--esp-2) var(--esp-4);
+  border-radius: var(--raio-sm);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-medio);
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: var(--texto-secundario);
+  transition: all var(--trans-rapida);
+}
+
+.preview__btn-sim:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--texto-primario);
+}
+
+.preview__btn-sim--acerto {
+  border-color: rgba(67, 160, 71, 0.4);
+  color: var(--cor-acerto);
+}
+
+.preview__btn-sim--acerto:hover {
+  background: rgba(67, 160, 71, 0.15);
+}
+
+.preview__btn-sim--erro {
+  border-color: rgba(229, 57, 53, 0.4);
+  color: var(--cor-erro);
+}
+
+.preview__btn-sim--erro:hover {
+  background: rgba(229, 57, 53, 0.15);
+}
+
+.preview__btn-sim--comemorar {
+  border-color: rgba(249, 168, 37, 0.4);
+  color: var(--cor-dica);
+}
+
+.preview__btn-sim--comemorar:hover {
+  background: rgba(249, 168, 37, 0.15);
+}

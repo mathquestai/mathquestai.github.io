@@ -1,0 +1,54 @@
+/* BotaoPedirDica.css */
+.btn-pedir-dica {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  background: linear-gradient(135deg, rgba(249,168,37,0.12), rgba(249,168,37,0.04));
+  border: 1px solid rgba(249, 168, 37, 0.4);
+  border-radius: var(--raio-full);
+  color: var(--cor-dica);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.08em;
+  padding: var(--esp-2) var(--esp-4);
+  cursor: pointer;
+  transition: all var(--trans-base);
+  white-space: nowrap;
+}
+
+.btn-pedir-dica:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(249,168,37,0.22), rgba(249,168,37,0.10));
+  border-color: var(--cor-dica);
+  box-shadow: 0 0 12px rgba(249, 168, 37, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-pedir-dica__icone {
+  font-size: var(--texto-base);
+  animation: flutuar 2s ease-in-out infinite;
+}
+
+.btn-pedir-dica__texto {
+  /* texto principal */
+}
+
+.btn-pedir-dica__custo {
+  font-size: var(--texto-xs);
+  color: var(--cor-erro);
+  opacity: 0.85;
+  font-weight: var(--peso-normal);
+  margin-left: var(--esp-1);
+}
+
+/* Estado: já usou */
+.btn-pedir-dica--usado,
+.btn-pedir-dica:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-pedir-dica--usado .btn-pedir-dica__icone {
+  animation: none;
+}

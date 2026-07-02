@@ -1,0 +1,416 @@
+/* CombatePage.css */
+
+/* ── Centro da batalha ── */
+.combate-centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-3);
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ── HUD superior ── */
+.combate-hud {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: var(--raio-xl);
+  padding: var(--esp-2) var(--esp-4);
+}
+
+.combate-hud__pontuacao {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 80px;
+}
+
+.combate-hud__label {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.combate-hud__valor {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xl);
+  font-weight: var(--peso-bold);
+  color: var(--texto-titulo);
+  line-height: 1.1;
+}
+
+.combate-hud__direita {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--esp-1);
+  min-width: 80px;
+}
+
+/* Combo */
+.combate-hud__combo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  background: rgba(245, 124, 0, 0.18);
+  border: 1px solid rgba(245, 124, 0, 0.45);
+  border-radius: var(--raio-full);
+  padding: 2px var(--esp-3);
+}
+
+.combate-hud__combo-valor {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xl);
+  font-weight: var(--peso-bold);
+  color: var(--cor-secundaria-clara);
+  text-shadow: 0 0 10px rgba(245, 124, 0, 0.5);
+  line-height: 1;
+}
+
+/* Acertos/Erros */
+.combate-hud__acertos {
+  display: flex;
+  gap: var(--esp-3);
+}
+
+.combate-hud__acertos-item {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-bold);
+}
+
+.combate-hud__acertos-item--ok    { color: var(--cor-acerto); }
+.combate-hud__acertos-item--erro  { color: var(--cor-erro); }
+
+/* ── Feedback de mensagem ── */
+.combate-feedback {
+  width: 100%;
+  padding: var(--esp-3) var(--esp-4);
+  border-radius: var(--raio-md);
+  font-family: var(--fonte-corpo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-medio);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.combate-feedback--correta {
+  background: var(--cor-acerto-bg);
+  border: 1px solid var(--cor-acerto-borda);
+  color: var(--cor-acerto);
+}
+
+.combate-feedback--errada {
+  background: var(--cor-erro-bg);
+  border: 1px solid var(--cor-erro-borda);
+  color: #ffcdd2;
+}
+
+/* ── Wrappers das telas de resultado ── */
+.combate-wrapper {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.combate-wrapper__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 15, 0.82);
+}
+
+/* ── Telas de resultado (vitória e derrota) ── */
+.tela-resultado {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  padding: var(--esp-4);
+}
+
+.tela-resultado__conteudo {
+  background: var(--fundo-card);
+  border: 2px solid var(--borda-dourada-esc);
+  border-radius: var(--raio-xl);
+  padding: var(--esp-8) var(--esp-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-5);
+  box-shadow: var(--sombra-painel), 0 0 60px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brilho no topo */
+.tela-resultado__conteudo::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--borda-dourada), transparent);
+}
+
+.tela-resultado--vitoria .tela-resultado__conteudo {
+  border-color: var(--cor-acerto-borda);
+  box-shadow: var(--sombra-painel), 0 0 40px rgba(67, 160, 71, 0.25);
+}
+
+.tela-resultado--vitoria .tela-resultado__conteudo::before {
+  background: linear-gradient(90deg, transparent, var(--cor-acerto), transparent);
+}
+
+.tela-resultado--derrota .tela-resultado__conteudo {
+  border-color: var(--cor-erro-borda);
+  box-shadow: var(--sombra-painel), 0 0 40px rgba(229, 57, 53, 0.2);
+}
+
+.tela-resultado--derrota .tela-resultado__conteudo::before {
+  background: linear-gradient(90deg, transparent, var(--cor-erro), transparent);
+}
+
+.tela-resultado__icone {
+  font-size: 3.5rem;
+  animation: escalarEntrar 500ms cubic-bezier(0.34,1.56,0.64,1) both;
+  line-height: 1;
+}
+
+.tela-resultado__titulo {
+  font-size: var(--texto-4xl);
+  text-align: center;
+  line-height: 1;
+}
+
+.tela-resultado--vitoria .tela-resultado__titulo { color: var(--cor-acerto); }
+.tela-resultado--derrota .tela-resultado__titulo { color: var(--cor-erro); }
+
+.tela-resultado__subtitulo {
+  font-size: var(--texto-base);
+  color: var(--texto-secundario);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.tela-resultado__subtitulo strong { color: var(--texto-primario); }
+
+/* ── Luna fala ── */
+.tela-resultado__luna {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--esp-3);
+  width: 100%;
+  background: rgba(249,168,37,0.07);
+  border: 1px solid rgba(249,168,37,0.2);
+  border-radius: var(--raio-md);
+  padding: var(--esp-3) var(--esp-4);
+}
+
+.tela-resultado__luna-icone {
+  font-size: var(--texto-2xl);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tela-resultado__luna-fala {
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-medio);
+  color: var(--texto-primario);
+  line-height: 1.6;
+}
+
+/* ── Stats grid ── */
+.tela-resultado__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+  justify-content: center;
+  width: 100%;
+}
+
+.tela-resultado__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-1);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--raio-md);
+  padding: var(--esp-3) var(--esp-4);
+  min-width: 90px;
+}
+
+.tela-resultado__stat-label {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.tela-resultado__stat-valor {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-2xl);
+  font-weight: var(--peso-bold);
+  color: var(--texto-titulo);
+}
+
+.tela-resultado__stat-valor--verde    { color: var(--cor-acerto); }
+.tela-resultado__stat-valor--vermelho { color: var(--cor-erro); }
+.tela-resultado__stat-valor--dourado  { color: var(--texto-dourado); }
+
+/* ── Botões ── */
+.tela-resultado__btn {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.05em;
+  padding: var(--esp-4) var(--esp-8);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: all var(--trans-base);
+  width: 100%;
+  max-width: 280px;
+}
+
+.tela-resultado__btn--primario {
+  background: linear-gradient(135deg, var(--cor-primaria-escura), var(--cor-primaria));
+  color: #fff;
+  border: 2px solid var(--cor-primaria-clara);
+  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.4);
+}
+
+.tela-resultado__btn--primario:hover {
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-primaria-clara));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(46, 125, 50, 0.55);
+}
+
+.tela-resultado__btn--secundario {
+  background: rgba(255,255,255,0.06);
+  color: var(--texto-primario);
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+.tela-resultado__btn--secundario:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-1px);
+}
+
+.tela-resultado__btn--terciario {
+  background: transparent;
+  color: var(--texto-muted);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: var(--texto-sm);
+  padding: var(--esp-3) var(--esp-6);
+}
+
+.tela-resultado__btn--terciario:hover {
+  color: var(--texto-primario);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* ── Botões agrupados ── */
+.tela-resultado__botoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-3);
+  width: 100%;
+}
+
+/* ── Overlay da tela de resultado ── */
+.tela-resultado {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: var(--esp-4);
+  overflow-y: auto;
+}
+
+.tela-resultado__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 15, 0.85);
+}
+
+.tela-resultado__conteudo {
+  position: relative;
+  z-index: 1;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.tela-resultado__conteudo::-webkit-scrollbar { display: none; }
+
+/* ── Diálogos de vitória ── */
+.tela-resultado__dialogos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  width: 100%;
+}
+
+.tela-resultado__dialogo-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  padding: var(--esp-3) var(--esp-4);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--raio-md);
+}
+
+.tela-resultado__dialogo-item--luna {
+  background: rgba(249,168,37,0.07);
+  border-color: rgba(249,168,37,0.2);
+}
+
+.tela-resultado__dialogo-speaker {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-bold);
+  color: var(--borda-dourada);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tela-resultado__dialogo-texto {
+  font-size: var(--texto-sm);
+  color: var(--texto-primario);
+  line-height: 1.6;
+}
+
+/* ── Luna na derrota ── */
+.tela-resultado__luna {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--esp-3);
+  width: 100%;
+  background: rgba(249,168,37,0.07);
+  border: 1px solid rgba(249,168,37,0.2);
+  border-radius: var(--raio-md);
+  padding: var(--esp-3) var(--esp-4);
+  font-size: var(--texto-sm);
+  color: var(--texto-primario);
+  line-height: 1.6;
+}

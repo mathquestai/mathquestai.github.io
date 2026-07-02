@@ -1,0 +1,105 @@
+/* =====================================================
+   MathQuest: A Jornada dos Números — Design System
+   Tema: RPG / Aventura Fantasia
+   ===================================================== */
+
+:root {
+  /* ── Paleta Principal — Aventura ── */
+  --cor-primaria:        #2e7d32;   /* verde floresta */
+  --cor-primaria-clara:  #4caf50;
+  --cor-primaria-escura: #1b5e20;
+
+  --cor-secundaria:        #f57c00;  /* âmbar/dourado */
+  --cor-secundaria-clara:  #ffb74d;
+  --cor-secundaria-escura: #bf360c;
+
+  --cor-roxo:        #6a1b9a;
+  --cor-roxo-clara:  #ab47bc;
+  --cor-azul:        #1565c0;
+  --cor-azul-clara:  #42a5f5;
+
+  /* ── Feedback ── */
+  --cor-acerto:      #43a047;
+  --cor-acerto-bg:   rgba(67, 160, 71, 0.15);
+  --cor-acerto-borda: rgba(67, 160, 71, 0.5);
+  --cor-erro:        #e53935;
+  --cor-erro-bg:     rgba(229, 57, 53, 0.15);
+  --cor-erro-borda:  rgba(229, 57, 53, 0.5);
+  --cor-dica:        #f9a825;
+  --cor-dica-bg:     rgba(249, 168, 37, 0.15);
+
+  /* ── Fundos — Tema Pergaminho/Madeira ── */
+  --fundo-tela:        #1a1a2e;    /* azul noturno profundo */
+  --fundo-painel:      rgba(20, 20, 40, 0.85);
+  --fundo-card:        rgba(30, 30, 60, 0.9);
+  --fundo-hud:         rgba(10, 10, 25, 0.92);
+
+  /* ── Decoração RPG ── */
+  --borda-dourada:     #c9a84c;
+  --borda-dourada-esc: #8d6e1a;
+  --borda-prata:       #90a4ae;
+
+  /* ── Texto ── */
+  --texto-primario:    #f5f0e8;     /* pergaminho claro */
+  --texto-secundario:  #b0bec5;
+  --texto-muted:       #607d8b;
+  --texto-dourado:     #ffd54f;
+  --texto-titulo:      #ffe082;
+
+  /* ── Barras de Vida ── */
+  --vida-heroi:        #4caf50;
+  --vida-heroi-escura: #2e7d32;
+  --vida-guardiao:     #ef5350;
+  --vida-guardiao-esc: #b71c1c;
+  --vida-fundo:        rgba(0,0,0,0.5);
+
+  /* ── Tipografia ── */
+  --fonte-titulo:  'Cinzel', 'Georgia', serif;
+  --fonte-corpo:   'Nunito', 'Arial Rounded MT Bold', sans-serif;
+
+  --texto-xs:   0.75rem;
+  --texto-sm:   0.875rem;
+  --texto-base: 1rem;
+  --texto-lg:   1.125rem;
+  --texto-xl:   1.25rem;
+  --texto-2xl:  1.5rem;
+  --texto-3xl:  1.875rem;
+  --texto-4xl:  2.25rem;
+  --texto-5xl:  3rem;
+
+  --peso-normal: 400;
+  --peso-medio:  600;
+  --peso-bold:   700;
+  --peso-extra:  800;
+
+  /* ── Espaçamentos ── */
+  --esp-1:  0.25rem;
+  --esp-2:  0.5rem;
+  --esp-3:  0.75rem;
+  --esp-4:  1rem;
+  --esp-5:  1.25rem;
+  --esp-6:  1.5rem;
+  --esp-8:  2rem;
+  --esp-10: 2.5rem;
+  --esp-12: 3rem;
+  --esp-16: 4rem;
+
+  /* ── Bordas ── */
+  --raio-sm:   6px;
+  --raio-md:   12px;
+  --raio-lg:   20px;
+  --raio-xl:   28px;
+  --raio-full: 9999px;
+
+  /* ── Transições ── */
+  --trans-rapida:  150ms ease;
+  --trans-base:    250ms ease;
+  --trans-lenta:   400ms ease;
+  --trans-bounce:  350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Sombras Ornamentadas ── */
+  --sombra-painel:  0 8px 32px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4);
+  --sombra-dourada: 0 0 12px rgba(201,168,76,0.4), 0 4px 16px rgba(0,0,0,0.5);
+  --sombra-acerto:  0 0 20px rgba(67, 160, 71, 0.5);
+  --sombra-erro:    0 0 20px rgba(229, 57, 53, 0.5);
+}

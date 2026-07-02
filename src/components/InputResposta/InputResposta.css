@@ -1,0 +1,86 @@
+/* InputResposta.css */
+.input-resposta {
+  display: flex;
+  gap: var(--esp-3);
+  width: 100%;
+}
+
+.input-resposta__campo {
+  flex: 1;
+  background: rgba(10, 10, 25, 0.88);
+  border: 2px solid var(--borda-dourada-esc);
+  border-radius: var(--raio-md);
+  color: var(--texto-primario);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-2xl);
+  font-weight: var(--peso-bold);
+  padding: var(--esp-3) var(--esp-4);
+  text-align: center;
+  transition: border-color var(--trans-base), box-shadow var(--trans-base), background var(--trans-base);
+  min-width: 0;
+}
+
+.input-resposta__campo:focus {
+  border-color: var(--borda-dourada);
+  box-shadow: 0 0 16px rgba(201, 168, 76, 0.35);
+  background: rgba(20, 20, 42, 0.95);
+  outline: none;
+}
+
+.input-resposta__campo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Remove setas do input number */
+.input-resposta__campo::-webkit-outer-spin-button,
+.input-resposta__campo::-webkit-inner-spin-button { -webkit-appearance: none; }
+.input-resposta__campo[type=number] { -moz-appearance: textfield; }
+
+/* ── Botão de Atacar ── */
+.input-resposta__btn {
+  background: linear-gradient(145deg, #2e7d32, #388e3c);
+  color: #fff;
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.05em;
+  padding: var(--esp-3) var(--esp-6);
+  border-radius: var(--raio-md);
+  border: 2px solid #43a047;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.45), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: all var(--trans-base);
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.input-resposta__btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background var(--trans-rapida);
+}
+
+.input-resposta__btn:hover:not(:disabled) {
+  background: linear-gradient(145deg, #388e3c, #4caf50);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.55);
+}
+
+.input-resposta__btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.4);
+}
+
+.input-resposta__btn:active:not(:disabled)::after {
+  background: rgba(255,255,255,0.1);
+}
+
+.input-resposta__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}

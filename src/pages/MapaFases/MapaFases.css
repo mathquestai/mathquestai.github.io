@@ -1,0 +1,332 @@
+/* MapaFases.css */
+.mapa {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-6);
+  padding: var(--esp-6) var(--esp-4) var(--esp-8);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Fundo animado */
+.mapa__fundo {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(46, 125, 50, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+    linear-gradient(160deg, #050510 0%, #0a0a1e 50%, #060615 100%);
+  z-index: -1;
+}
+
+/* ── Cabeçalho ── */
+.mapa__cabecalho {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-4);
+  padding-bottom: var(--esp-4);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.mapa__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.mapa__logo-icone {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.mapa__titulo {
+  font-size: var(--texto-2xl);
+  color: var(--texto-titulo);
+  line-height: 1;
+}
+
+.mapa__subtitulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.mapa__jogador {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: var(--raio-xl);
+  padding: var(--esp-2) var(--esp-4);
+}
+
+.mapa__jogador-sprite {
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+
+.mapa__jogador-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mapa__jogador-nome {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  color: var(--texto-titulo);
+}
+
+.mapa__jogador-progresso {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  color: var(--borda-dourada);
+}
+
+/* ── Seção título ── */
+.mapa__secao-titulo {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.mapa__secao-h2 {
+  font-size: var(--texto-2xl);
+  color: var(--texto-titulo);
+}
+
+.mapa__secao-desc {
+  font-size: var(--texto-base);
+  color: var(--texto-muted);
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* ── Grid de fases ── */
+.mapa__fases {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-width: 700px;
+  position: relative;
+}
+
+/* ── Card de cada fase ── */
+.mapa__fase {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--trans-base);
+  padding: var(--esp-2) 0;
+}
+
+.mapa__fase--disponivel:hover { transform: translateX(8px); }
+.mapa__fase--bloqueada        { cursor: not-allowed; }
+
+.mapa__fase-card {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-4);
+  padding: var(--esp-4) var(--esp-5);
+  background: rgba(255,255,255,0.03);
+  border: 2px solid rgba(255,255,255,0.08);
+  border-radius: var(--raio-xl);
+  transition: all var(--trans-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brilho lateral da cor da fase */
+.mapa__fase--disponivel .mapa__fase-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--cor-fase);
+  border-radius: var(--raio-sm) 0 0 var(--raio-sm);
+}
+
+.mapa__fase--disponivel .mapa__fase-card {
+  border-color: rgba(255,255,255,0.12);
+}
+
+.mapa__fase--disponivel:hover .mapa__fase-card {
+  border-color: var(--cor-borda);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px var(--cor-borda);
+}
+
+.mapa__fase--concluida .mapa__fase-card {
+  border-color: rgba(76, 175, 80, 0.3);
+  background: rgba(76, 175, 80, 0.05);
+}
+
+.mapa__fase--atual .mapa__fase-card {
+  border-color: var(--borda-dourada-esc);
+  background: rgba(201, 168, 76, 0.06);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.1);
+}
+
+.mapa__fase--bloqueada .mapa__fase-card {
+  opacity: 0.45;
+  filter: grayscale(0.7);
+}
+
+/* Conector vertical */
+.mapa__conector {
+  position: absolute;
+  left: 46px;
+  bottom: -16px;
+  width: 2px;
+  height: 32px;
+  background: rgba(255,255,255,0.08);
+  z-index: 1;
+  transition: background 300ms ease;
+}
+
+.mapa__conector--ativo {
+  background: rgba(76, 175, 80, 0.4);
+}
+
+/* Guardião */
+.mapa__fase-guardiao {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapa__fase-guardiao-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+}
+
+/* Badges */
+.mapa__fase-selo {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  background: var(--cor-acerto);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: var(--peso-bold);
+  color: #fff;
+}
+
+.mapa__fase-cadeado {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: rgba(0,0,0,0.4);
+  border-radius: var(--raio-sm);
+}
+
+.mapa__fase-atual-badge {
+  position: absolute;
+  top: -10px;
+  right: -4px;
+  background: var(--borda-dourada);
+  color: #000;
+  font-family: var(--fonte-titulo);
+  font-size: 9px;
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  border-radius: var(--raio-full);
+}
+
+/* Info texto */
+.mapa__fase-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  min-width: 0;
+}
+
+.mapa__fase-numero {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.mapa__fase--disponivel .mapa__fase-numero { color: var(--cor-fase); }
+
+.mapa__fase-nome {
+  font-size: var(--texto-lg);
+  color: var(--texto-titulo);
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mapa__fase-guardiao-nome {
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+}
+
+.mapa__fase-detalhes {
+  display: flex;
+  gap: var(--esp-3);
+  flex-wrap: wrap;
+  margin-top: var(--esp-1);
+}
+
+.mapa__fase-detalhes span {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  color: var(--texto-muted);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--raio-full);
+  padding: 2px var(--esp-3);
+}
+
+/* Botão de ação */
+.mapa__fase-btn {
+  flex-shrink: 0;
+  color: #fff;
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.05em;
+  padding: var(--esp-3) var(--esp-4);
+  border: 2px solid;
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: all var(--trans-base);
+  white-space: nowrap;
+}
+
+.mapa__fase:hover .mapa__fase-btn {
+  transform: scale(1.05);
+  filter: brightness(1.15);
+}

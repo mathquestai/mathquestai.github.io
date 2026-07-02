@@ -1,0 +1,87 @@
+/* TimerCombate.css */
+.timer {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── SVG do círculo ── */
+.timer__circulo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.timer__trilho {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.timer__arco {
+  transition: stroke-dasharray 1s linear, stroke 400ms ease;
+  stroke: #4caf50;
+}
+
+/* Cores por estado */
+.timer--verde  .timer__arco { stroke: #4caf50; }
+.timer--amarelo .timer__arco { stroke: #ffa726; }
+.timer--vermelho .timer__arco { stroke: #ef5350; }
+
+/* ── Centro ── */
+.timer__centro {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.timer__tempo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-bold);
+  line-height: 1;
+  color: var(--texto-primario);
+  transition: color 400ms ease;
+}
+
+.timer--verde  .timer__tempo  { color: #81c784; }
+.timer--amarelo .timer__tempo { color: #ffb74d; }
+.timer--vermelho .timer__tempo { color: #ef9a9a; }
+
+.timer__pausado-icone {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* ── Fundo do disco ── */
+.timer::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Estado: pulsando (≤ 20s) ── */
+.timer--pulsando {
+  animation: pulsarTimer 800ms ease-in-out infinite;
+}
+
+@keyframes pulsarTimer {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.08); }
+}
+
+/* ── Estado: pausado ── */
+.timer--pausado .timer__arco {
+  opacity: 0.45;
+}
