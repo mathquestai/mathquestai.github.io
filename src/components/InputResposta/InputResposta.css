@@ -84,3 +84,17 @@
   cursor: not-allowed;
   transform: none;
 }
+
+/* ── Responsividade Mobile (< 768px) ── */
+@media (max-width: 768px) {
+  .input-resposta__campo {
+    font-size: var(--texto-xl);
+    padding: var(--esp-2) var(--esp-3);
+  }
+  
+  .input-resposta__btn {
+    padding: var(--esp-3) var(--esp-4);
+    min-height: 44px; /* Touch target size da Apple */
+    font-size: var(--texto-sm);
+  }
+}

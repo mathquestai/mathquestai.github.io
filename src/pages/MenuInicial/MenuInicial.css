@@ -180,3 +180,26 @@
   color: var(--texto-primario);
   border-color: rgba(255, 255, 255, 0.2);
 }
+
+/* ── Responsividade Mobile (< 768px) ── */
+@media (max-width: 768px) {
+  .menu-inicial__personagens {
+    height: 150px;
+    gap: var(--esp-2);
+  }
+  .menu-inicial__sprite--kai {
+    height: 140px;
+  }
+  .menu-inicial__sprite--luna {
+    height: 100px;
+  }
+  .menu-inicial__form {
+    padding: var(--esp-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-inicial__conteudo {
+    gap: var(--esp-4);
+  }
+}

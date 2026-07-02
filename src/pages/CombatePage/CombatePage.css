@@ -457,3 +457,58 @@
   20% { filter: brightness(1.5) drop-shadow(0 0 20px rgba(76, 175, 80, 0.8)); }
   100% { filter: brightness(1); }
 }
+
+/* ── Responsividade Mobile (< 768px) ── */
+@media (max-width: 768px) {
+  .combate-centro {
+    max-width: 100%;
+  }
+  
+  .combate-hud {
+    padding: var(--esp-2);
+    border-radius: var(--raio-lg);
+  }
+  
+  .combate-hud__valor {
+    font-size: var(--texto-lg);
+  }
+  
+  .combate-hud__combo-valor {
+    font-size: var(--texto-lg);
+  }
+  
+  .tela-resultado__conteudo {
+    padding: var(--esp-6) var(--esp-4);
+    gap: var(--esp-4);
+  }
+  
+  .tela-resultado__icone {
+    font-size: 2.5rem;
+  }
+  
+  .tela-resultado__titulo {
+    font-size: var(--texto-2xl);
+  }
+  
+  .tela-resultado__stats {
+    gap: var(--esp-2);
+  }
+  
+  .tela-resultado__stat {
+    min-width: 45%;
+    padding: var(--esp-2);
+  }
+  
+  .tela-resultado__stat-valor {
+    font-size: var(--texto-xl);
+  }
+  
+  .tela-resultado__btn {
+    padding: var(--esp-3) var(--esp-4);
+    max-width: 100%;
+  }
+  
+  .tela-resultado__dialogo-item {
+    padding: var(--esp-2) var(--esp-3);
+  }
+}

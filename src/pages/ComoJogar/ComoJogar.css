@@ -154,3 +154,20 @@
   background: var(--borda-dourada);
   transform: scale(1.2);
 }
+
+/* ── Responsividade Mobile (< 768px) ── */
+@media (max-width: 768px) {
+  .tutorial__conteudo {
+    padding: var(--esp-4);
+  }
+  .tutorial__slide {
+    min-height: 180px;
+  }
+  .tutorial__slide-icone {
+    font-size: 3.5rem;
+  }
+  .tutorial__btn-controle {
+    min-width: 90px;
+    padding: var(--esp-2) var(--esp-3);
+  }
+}

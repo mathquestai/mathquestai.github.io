@@ -63,3 +63,14 @@
   color: var(--texto-muted);
   line-height: 1.4;
 }
+
+/* ── Responsividade Mobile (< 768px) ── */
+@media (max-width: 768px) {
+  .conquista-popup {
+    left: var(--esp-3);
+    right: var(--esp-3);
+    bottom: var(--esp-3);
+    max-width: none;
+    width: auto;
+  }
+}

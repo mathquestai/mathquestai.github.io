@@ -237,3 +237,24 @@
   color: var(--texto-primario);
   border-color: rgba(255,255,255,0.25);
 }
+
+/* ── Responsividade Mobile (< 768px) ── */
+@media (max-width: 768px) {
+  .intro-fase {
+    padding: var(--esp-4) var(--esp-2) var(--esp-4);
+  }
+  .intro-fase__dialogo-texto {
+    padding: var(--esp-3);
+    font-size: var(--texto-sm);
+  }
+  .intro-fase__btn-avancar, .intro-fase__btn-voltar {
+    padding: var(--esp-2) var(--esp-4);
+    font-size: var(--texto-sm);
+  }
+  .intro-fase__dialogo-rodape {
+    flex-direction: column;
+  }
+  .intro-fase__btn-voltar {
+    width: 100%;
+  }
+}

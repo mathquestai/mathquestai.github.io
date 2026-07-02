@@ -148,3 +148,19 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
 }
+
+/* ── Responsividade Mobile (< 768px) ── */
+@media (max-width: 768px) {
+  .vitoria-final__conteudo {
+    padding: var(--esp-4);
+  }
+  .vitoria-final__icone {
+    font-size: 3.5rem;
+  }
+  .vitoria-final__stats {
+    flex-wrap: wrap;
+  }
+  .vitoria-final__stat {
+    min-width: 45%;
+  }
+}

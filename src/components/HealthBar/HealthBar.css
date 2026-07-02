@@ -93,3 +93,29 @@
 .barra-vida--guardiao .barra-vida__alerta {
   text-align: left;
 }
+
+/* ── Responsividade Mobile (< 768px) ── */
+@media (max-width: 768px) {
+  .barra-vida {
+    min-width: 0;
+    width: 100%;
+    max-width: 160px;
+  }
+  
+  .barra-vida__nome {
+    font-size: var(--texto-xs);
+    max-width: 90px;
+  }
+  
+  .barra-vida__valor {
+    font-size: var(--texto-sm);
+  }
+  
+  .barra-vida__trilho {
+    height: 10px;
+  }
+  
+  .barra-vida__preenchimento::after {
+    height: 3px;
+  }
+}
