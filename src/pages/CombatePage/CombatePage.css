@@ -357,10 +357,24 @@
   z-index: 1;
   max-height: 90vh;
   overflow-y: auto;
-  scrollbar-width: none;
+  padding-right: var(--esp-2);
 }
 
-.tela-resultado__conteudo::-webkit-scrollbar { display: none; }
+/* ── Estilização da Scrollbar ── */
+.tela-resultado__conteudo::-webkit-scrollbar {
+  width: 6px;
+}
+.tela-resultado__conteudo::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.tela-resultado__conteudo::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+.tela-resultado__conteudo::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
 
 /* ── Diálogos de vitória ── */
 .tela-resultado__dialogos {
