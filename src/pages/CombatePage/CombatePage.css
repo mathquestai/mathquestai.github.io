@@ -137,7 +137,6 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 520px;
   padding: var(--esp-4);
 }
 
@@ -153,6 +152,8 @@
   box-shadow: var(--sombra-painel), 0 0 60px rgba(0,0,0,0.5);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 520px;
 }
 
 /* Brilho no topo */
