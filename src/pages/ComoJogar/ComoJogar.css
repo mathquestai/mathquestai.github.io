@@ -1,0 +1,156 @@
+/* ComoJogar.css */
+.tutorial {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--esp-4);
+  z-index: 200; /* Acima do resto */
+}
+
+.tutorial__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 20, 0.9);
+  backdrop-filter: blur(8px);
+}
+
+.tutorial__conteudo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 600px;
+  background: var(--fundo-card);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--raio-xl);
+  padding: var(--esp-6);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-6);
+}
+
+.tutorial__cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: var(--esp-3);
+}
+
+.tutorial__titulo {
+  font-size: var(--texto-2xl);
+  color: var(--texto-titulo);
+}
+
+.tutorial__btn-fechar {
+  background: transparent;
+  color: var(--texto-muted);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-bold);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--raio-sm);
+  padding: var(--esp-2) var(--esp-3);
+  cursor: pointer;
+  transition: all var(--trans-base);
+}
+
+.tutorial__btn-fechar:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+/* ── Slide ── */
+.tutorial__slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--esp-4);
+  min-height: 250px;
+}
+
+.tutorial__slide-icone {
+  font-size: 5rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+.tutorial__slide-titulo {
+  font-size: var(--texto-xl);
+  color: var(--borda-dourada);
+}
+
+.tutorial__slide-texto {
+  font-size: var(--texto-lg);
+  color: var(--texto-primario);
+  line-height: 1.6;
+}
+
+/* ── Controles ── */
+.tutorial__controles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--esp-4);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.tutorial__btn-controle {
+  background: rgba(255,255,255,0.05);
+  color: var(--texto-primario);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-bold);
+  padding: var(--esp-3) var(--esp-4);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: all var(--trans-base);
+  min-width: 120px;
+}
+
+.tutorial__btn-controle:not(:disabled):hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-1px);
+}
+
+.tutorial__btn-controle:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.tutorial__btn-controle--destaque {
+  background: var(--cor-acerto);
+  border-color: var(--cor-acerto-borda);
+  color: #fff;
+}
+
+.tutorial__btn-controle--destaque:hover {
+  background: #388e3c;
+}
+
+/* ── Dots ── */
+.tutorial__dots {
+  display: flex;
+  gap: var(--esp-2);
+}
+
+.tutorial__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: background 300ms ease;
+}
+
+.tutorial__dot--ativo {
+  background: var(--borda-dourada);
+  transform: scale(1.2);
+}

@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import './CombatePage.css';
 import {
   BattleStage, ExibicaoQuestao, InputResposta,
@@ -47,6 +47,19 @@ function TelaVitoriaFase({ estado, fase, aoProximaFase, aoJogarNovamente, aoMapa
                 <p className="tela-resultado__dialogo-texto">{d.texto}</p>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* Resumo Pedagógico da Luna (Sprint 6) */}
+        {!ehUltimaFase && (
+          <div className="tela-resultado__dialogo-item tela-resultado__dialogo-item--luna" style={{marginTop: 'var(--esp-2)'}}>
+            <span className="tela-resultado__dialogo-speaker">🦉 LUNA (Resumo Pedagógico)</span>
+            <p className="tela-resultado__dialogo-texto">
+              {fase.id === 1 && "Muito bem! Você dominou as tabuadas básicas. Para ser mais rápido, tente decorar os múltiplos de 5 e 10!"}
+              {fase.id === 2 && "Ótimo! Multiplicações maiores exigem prática. Lembre-se que você pode quebrar os números: 15x4 é o mesmo que 10x4 + 5x4."}
+              {fase.id === 3 && "Fantástico! O conceito de divisão está ficando claro. Lembre-se: a divisão é o inverso da multiplicação."}
+              {fase.id === 4 && "Incrível! Divisões maiores podem assustar, mas você foi valente. Se ficar em dúvida, multiplique mentalmente para verificar."}
+            </p>
           </div>
         )}
 
@@ -146,6 +159,7 @@ export default function CombatePage() {
     estado, acertar, errar, proximoTurno,
     usarDica, fecharDica, timeout, reiniciar,
     resetarAnim, progredirFase, irParaMapa,
+    setEfeitoTela,
   } = useGame();
 
   const fase = getFase(estado.faseAtual);
@@ -159,6 +173,14 @@ export default function CombatePage() {
   const [msgFeedback,    setMsgFeedback]    = useState(null);
   const [motivoDerrota,  setMotivoDerrota]  = useState('hp');
   const [reiniciarTimer, setReiniciarTimer] = useState(false);
+
+  // Efeito para limpar o shake/flash após um breve tempo
+  useEffect(() => {
+    if (estado.efeitoTela) {
+      const timerId = setTimeout(() => setEfeitoTela(null), 500); // tempo das animações CSS
+      return () => clearTimeout(timerId);
+    }
+  }, [estado.efeitoTela, setEfeitoTela]);
 
   const gerarNovaQuestao = useCallback(() => {
     setQuestao(gerarQuestao(fase.dificuldade));
@@ -273,7 +295,8 @@ export default function CombatePage() {
 
   /* ── Tela de combate ── */
   return (
-    <BattleStage
+    <div className={`combate-efeitos-wrapper ${estado.efeitoTela ? estado.efeitoTela : ''}`}>
+      <BattleStage
       imagemFundo={fase.imagemFundo}
       heroi={{
         nome:       estado.nomeJogador,
@@ -355,5 +378,6 @@ export default function CombatePage() {
 
       </div>
     </BattleStage>
+    </div>
   );
 }

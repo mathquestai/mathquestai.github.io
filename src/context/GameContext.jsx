@@ -9,13 +9,18 @@ const estadoInicial = {
   nomeJogador: 'Kai',
 
   // Navegação
-  // 'mapa' | 'intro_fase' | 'combate' | 'vitoria_fase' | 'derrota_fase' | 'vitoria_final'
-  tela: 'mapa',
+  // 'menu' | 'tutorial' | 'mapa' | 'intro_fase' | 'combate' | 'vitoria_fase' | 'derrota_fase' | 'vitoria_final'
+  tela: 'menu',
 
   // Progressão
   faseAtual:        1,
-  fasesConcluidas:  [],   // array de IDs de fases concluídas
-  pontuacaoTotal:   0,    // acumulada entre fases
+  fasesConcluidas:  [],
+  pontuacaoTotal:   0,
+
+  // Sistema de Conquistas e Efeitos (Sprint 6)
+  conquistas: [],
+  conquistaRecente: null,
+  efeitoTela: null, // 'shake' | 'flash-verde' | 'flash-vermelho'
 
   // Combate da fase atual
   vidaHeroi:         100,
@@ -75,10 +80,30 @@ function estadoCombateFase(estado, faseId) {
 }
 
 /* ─────────────────────────────────────────────────────────
+   Helper: Adicionar Conquista
+───────────────────────────────────────────────────────── */
+function adicionarConquista(estado, id, icone, titulo, descricao) {
+  if (estado.conquistas.includes(id)) return estado;
+  return {
+    ...estado,
+    conquistas: [...estado.conquistas, id],
+    conquistaRecente: { id, icone, titulo, descricao }
+  };
+}
+
+/* ─────────────────────────────────────────────────────────
    Reducer
 ───────────────────────────────────────────────────────── */
 function gameReducer(estado, acao) {
   switch (acao.type) {
+
+    /* ── Conquistas & Efeitos (Sprint 6) ── */
+    case 'DESBLOQUEAR_CONQUISTA': 
+      return adicionarConquista(estado, acao.payload.id, acao.payload.icone, acao.payload.titulo, acao.payload.descricao);
+    case 'LIMPAR_CONQUISTA':
+      return { ...estado, conquistaRecente: null };
+    case 'SET_EFEITO_TELA':
+      return { ...estado, efeitoTela: acao.payload };
 
     /* ── Combate ── */
     case 'ACERTO': {
@@ -88,7 +113,7 @@ function gameReducer(estado, acao) {
       const novosPontos      = estado.pontuacao + PONTOS_BASE * Math.max(1, novoCombo);
       const guardiaoDerrotado = novaVidaGuardiao <= 0;
 
-      return {
+      let novoEstado = {
         ...estado,
         vidaGuardiao:      novaVidaGuardiao,
         pontuacao:         novosPontos,
@@ -98,6 +123,8 @@ function gameReducer(estado, acao) {
         errosConsecutivos: 0,
         estadoHeroi:       'atacar',
         estadoGuardiao:    'receber',
+        efeitoTela:        'flash-verde',
+
         dicaUsadaNaQuestao: false,
         timerAtivo:        !guardiaoDerrotado,
         tela:              guardiaoDerrotado ? 'vitoria_fase' : estado.tela,
@@ -108,6 +135,12 @@ function gameReducer(estado, acao) {
           ? estado.pontuacaoTotal + novosPontos
           : estado.pontuacaoTotal,
       };
+
+      if (novoCombo === 5) {
+        novoEstado = adicionarConquista(novoEstado, 'combo_5', '🔥', 'Combo Mestre', 'Chegou a 5 acertos consecutivos!');
+      }
+
+      return novoEstado;
     }
 
     case 'ERRO': {
@@ -122,6 +155,8 @@ function gameReducer(estado, acao) {
         errosConsecutivos: estado.errosConsecutivos + 1,
         estadoHeroi:       'receber',
         estadoGuardiao:    'atacar',
+        efeitoTela:        'shake',
+
         timerAtivo:        !heroiDerrotado,
         tela:              heroiDerrotado ? 'derrota_fase' : estado.tela,
       };
@@ -139,13 +174,22 @@ function gameReducer(estado, acao) {
           ? [...new Set([...estado.fasesConcluidas, estado.faseAtual])]
           : estado.fasesConcluidas;
 
-        return {
+        let novoEstado = {
           ...estado,
           tela:            venceu ? 'vitoria_fase' : 'derrota_fase',
           timerAtivo:      false,
           fasesConcluidas: novasFasesConcluidas,
           pontuacaoTotal:  venceu ? estado.pontuacaoTotal + estado.pontuacao : estado.pontuacaoTotal,
         };
+
+        if (venceu) {
+          if (estado.vidaHeroi === 100) {
+            novoEstado = adicionarConquista(novoEstado, 'intocavel', '🛡️', 'Intocável', 'Venceu uma fase sem sofrer dano!');
+          } else if (estado.vidaHeroi <= 20) {
+            novoEstado = adicionarConquista(novoEstado, 'sobrevivente', '❤️‍🩹', 'Sobrevivente', 'Venceu com 20% ou menos de vida!');
+          }
+        }
+        return novoEstado;
       }
       return {
         ...estado,
@@ -242,6 +286,9 @@ export function GameProvider({ children }) {
   const irParaIntro   = useCallback((faseId) => dispatch({ type: 'IR_PARA_INTRO', faseId }), []);
   const irParaTela    = useCallback((tela) => dispatch({ type: 'IR_PARA_TELA', tela }),      []);
   const definirNome   = useCallback((nome) => dispatch({ type: 'DEFINIR_NOME', nome }),      []);
+  const desbloquearConquista = useCallback((payload) => dispatch({ type: 'DESBLOQUEAR_CONQUISTA', payload }), []);
+  const limparConquistaRecente = useCallback(() => dispatch({ type: 'LIMPAR_CONQUISTA' }), []);
+  const setEfeitoTela = useCallback((payload) => dispatch({ type: 'SET_EFEITO_TELA', payload }), []);
 
   return (
     <GameContext.Provider value={{
@@ -251,6 +298,7 @@ export function GameProvider({ children }) {
       reiniciar, resetarAnim,
       progredirFase, irParaMapa, iniciarCombate,
       irParaIntro, irParaTela, definirNome,
+      desbloquearConquista, limparConquistaRecente, setEfeitoTela,
       CUSTO_DICA,
     }}>
       {children}

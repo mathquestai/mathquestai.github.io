@@ -1,0 +1,182 @@
+/* MenuInicial.css */
+.menu-inicial {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--esp-4);
+}
+
+.menu-inicial__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 5, 20, 0.4) 0%,
+    rgba(5, 5, 20, 0.8) 50%,
+    rgba(5, 5, 20, 0.95) 100%
+  );
+  backdrop-filter: blur(4px);
+}
+
+.menu-inicial__conteudo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-6);
+  width: 100%;
+  max-width: 500px;
+}
+
+/* ── Cabeçalho ── */
+.menu-inicial__cabecalho {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.menu-inicial__subtitulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  color: var(--borda-dourada);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.menu-inicial__titulo {
+  font-size: clamp(3.5rem, 8vw, 5rem);
+  color: var(--texto-titulo);
+  line-height: 1;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+}
+
+.menu-inicial__titulo-destaque {
+  color: var(--cor-primaria-clara);
+}
+
+/* ── Personagens ── */
+.menu-inicial__personagens {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--esp-4);
+  height: 220px;
+}
+
+.menu-inicial__sprite {
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+}
+
+.menu-inicial__sprite--kai {
+  height: 200px;
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+.menu-inicial__sprite--luna {
+  height: 140px;
+  animation: flutuar 3.5s ease-in-out infinite reverse;
+}
+
+/* ── Formulário ── */
+.menu-inicial__form {
+  background: rgba(20, 20, 40, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--raio-xl);
+  padding: var(--esp-6);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+}
+
+.menu-inicial__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.menu-inicial__label {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-sm);
+  color: var(--texto-muted);
+  text-align: center;
+}
+
+.menu-inicial__input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--raio-md);
+  padding: var(--esp-3) var(--esp-4);
+  color: #fff;
+  font-family: var(--fonte-corpo);
+  font-size: var(--texto-lg);
+  font-weight: var(--peso-bold);
+  text-align: center;
+  transition: all var(--trans-base);
+  outline: none;
+}
+
+.menu-inicial__input:focus {
+  border-color: var(--cor-primaria);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.2);
+}
+
+/* ── Botões ── */
+.menu-inicial__botoes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.menu-inicial__btn {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  padding: var(--esp-4);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: all var(--trans-base);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.menu-inicial__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.menu-inicial__btn--primario {
+  background: linear-gradient(135deg, var(--cor-primaria-escura), var(--cor-primaria));
+  color: #fff;
+  border: 2px solid var(--cor-primaria-clara);
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+}
+
+.menu-inicial__btn--primario:not(:disabled):hover {
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-primaria-clara));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.5);
+}
+
+.menu-inicial__btn--secundario {
+  background: transparent;
+  color: var(--texto-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-inicial__btn--secundario:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--texto-primario);
+  border-color: rgba(255, 255, 255, 0.2);
+}
