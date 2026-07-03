@@ -3,6 +3,7 @@ import { GameProvider, useGame } from './context/GameContext';
 import MapaFases   from './pages/MapaFases';
 import IntroFase   from './pages/IntroFase';
 import CombatePage from './pages/CombatePage';
+import LoadingScreen from './pages/LoadingScreen';
 
 import MenuInicial from './pages/MenuInicial';
 import ComoJogar   from './pages/ComoJogar';
@@ -17,6 +18,7 @@ function Roteador() {
   const { estado } = useGame();
   const { tela } = estado;
 
+  if (tela === 'loading')       return <LoadingScreen />;
   if (tela === 'menu')          return <MenuInicial />;
   if (tela === 'tutorial')      return <ComoJogar />;
   if (tela === 'intro_fase')    return <IntroFase />;

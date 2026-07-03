@@ -45,6 +45,8 @@ export default function GlobalAudioControls() {
   
   // Calcula qual deve ser a música baseada na tela/fase atual do jogador
   const currentBgmUrl = useMemo(() => {
+    if (estado.tela === 'loading') return null;
+
     const telasMenu = ['menu', 'mapa', 'tutorial', 'vitoria_final'];
     if (telasMenu.includes(estado.tela) || !estado.tela) {
       return '/sounds/bgm_menu.ogg';
@@ -57,7 +59,7 @@ export default function GlobalAudioControls() {
 
   return (
     <>
-      <BgmPlayer key={currentBgmUrl} url={currentBgmUrl} />
+      {currentBgmUrl && <BgmPlayer key={currentBgmUrl} url={currentBgmUrl} />}
       <button 
         className="global-mute-btn" 
         onClick={toggleMute}

@@ -9,8 +9,8 @@ const estadoInicial = {
   nomeJogador: 'Kai',
 
   // Navegação
-  // 'menu' | 'tutorial' | 'mapa' | 'intro_fase' | 'combate' | 'vitoria_fase' | 'derrota_fase' | 'vitoria_final'
-  tela: 'menu',
+  // 'loading' | 'menu' | 'tutorial' | 'mapa' | 'intro_fase' | 'combate' | 'vitoria_fase' | 'derrota_fase' | 'vitoria_final'
+  tela: 'loading',
 
   // Progressão
   faseAtual:        1,
