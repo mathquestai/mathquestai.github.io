@@ -6,7 +6,7 @@ import {
 } from '../../components';
 import { useGame } from '../../context/GameContext';
 import { getFase, TOTAL_FASES } from '../../utils/configFases';
-import { gerarQuestao } from '../../utils/geradorQuestoes';
+import { gerarLoteQuestoes } from '../../utils/geradorQuestoes';
 import { validarResposta } from '../../utils/validadorResposta';
 import { gerarDica, mensagemAcerto, mensagemErro } from '../../utils/geradorDicas';
 
@@ -165,7 +165,10 @@ export default function CombatePage() {
   const fase = getFase(estado.faseAtual);
 
   /* ── Estado local ── */
-  const [questao,        setQuestao]        = useState(() => gerarQuestao(fase.dificuldade));
+  // Pré-gera lote de questões únicas para a fase inteira
+  const [loteQuestoes,   setLoteQuestoes]   = useState(() => gerarLoteQuestoes(fase.dificuldade, fase.totalPerguntas));
+  const [indiceQuestao,  setIndiceQuestao]  = useState(0);
+  const [questao,        setQuestao]        = useState(() => gerarLoteQuestoes(fase.dificuldade, fase.totalPerguntas)[0]);
   const [statusResposta, setStatusResposta] = useState('');
   const [inputBloqueado, setInputBloqueado] = useState(false);
   const [dica,           setDica]           = useState(null);
@@ -183,13 +186,23 @@ export default function CombatePage() {
   }, [estado.efeitoTela, setEfeitoTela]);
 
   const gerarNovaQuestao = useCallback(() => {
-    setQuestao(gerarQuestao(fase.dificuldade));
+    setIndiceQuestao(prev => {
+      const proximoIndice = prev + 1;
+      const proximaQuestao = loteQuestoes[proximoIndice];
+      // Se acabou o lote (não deveria acontecer pois totalPerguntas controla), gera nova aleatória
+      if (proximaQuestao) {
+        setQuestao(proximaQuestao);
+      } else {
+        setQuestao(gerarLoteQuestoes(fase.dificuldade, 1)[0]);
+      }
+      return proximoIndice;
+    });
     setStatusResposta('');
     setInputBloqueado(false);
     setDicaVisivel(false);
     setDica(null);
     setMsgFeedback(null);
-  }, [fase.dificuldade]);
+  }, [fase.dificuldade, loteQuestoes]);
 
   /* ── Responder ── */
   const handleResponder = useCallback((valor) => {
@@ -249,7 +262,10 @@ export default function CombatePage() {
   /* ── Reiniciar fase ── */
   const handleReiniciar = useCallback(() => {
     reiniciar();
-    setQuestao(gerarQuestao(fase.dificuldade));
+    const novoLote = gerarLoteQuestoes(fase.dificuldade, fase.totalPerguntas);
+    setLoteQuestoes(novoLote);
+    setIndiceQuestao(0);
+    setQuestao(novoLote[0]);
     setStatusResposta('');
     setInputBloqueado(false);
     setDica(null);
@@ -257,15 +273,25 @@ export default function CombatePage() {
     setMsgFeedback(null);
     setMotivoDerrota('hp');
     setReiniciarTimer(r => !r);
-  }, [reiniciar, fase.dificuldade]);
+  }, [reiniciar, fase.dificuldade, fase.totalPerguntas]);
 
   /* ── Próxima fase ── */
   const handleProximaFase = useCallback(() => {
     progredirFase();
-    gerarNovaQuestao();
+    // A próxima fase terá dificuldade diferente: recriar lote com base na próxima fase
+    const proximaFase = getFase(Math.min(estado.faseAtual + 1, 5));
+    const novoLote = gerarLoteQuestoes(proximaFase.dificuldade, proximaFase.totalPerguntas);
+    setLoteQuestoes(novoLote);
+    setIndiceQuestao(0);
+    setQuestao(novoLote[0]);
+    setStatusResposta('');
+    setInputBloqueado(false);
+    setDicaVisivel(false);
+    setDica(null);
+    setMsgFeedback(null);
     setMotivoDerrota('hp');
     setReiniciarTimer(r => !r);
-  }, [progredirFase, gerarNovaQuestao]);
+  }, [progredirFase, estado.faseAtual]);
 
   /* ── Tela de vitória ── */
   if (estado.tela === 'vitoria_fase') {
