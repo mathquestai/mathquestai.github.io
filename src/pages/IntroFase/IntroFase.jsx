@@ -4,6 +4,8 @@ import './IntroFase.css';
 import { useGame } from '../../context/GameContext';
 import { useSoundContext } from '../../context/SoundContext';
 import { getFase } from '../../utils/configFases';
+import ModalEstudo from '../../components/ModalEstudo';
+import { CONTEUDO_ESTUDO } from '../../utils/conteudoEstudo';
 
 /**
  * IntroFase — Tela de introdução narrativa de cada fase.
@@ -17,6 +19,9 @@ export default function IntroFase() {
   const [passoDialogo, setPassoDialogo] = useState(0);
   const [textoExibido, setTextoExibido] = useState('');
   const [digitando,    setDigitando]    = useState(true);
+  
+  // Estado do Modal de Estudo
+  const [modalEstudoVisivel, setModalEstudoVisivel] = useState(false);
 
   const dialogoAtual = fase.dialogoIntro[passoDialogo];
 
@@ -112,6 +117,22 @@ export default function IntroFase() {
 
         <div className="intro-fase__dialogo-rodape">
           <button
+            className="intro-fase__btn-voltar"
+            onClick={(e) => { e.stopPropagation(); irParaMapa(); }}
+            id="btn-voltar-mapa"
+          >
+            ← Mapa
+          </button>
+          
+          <button
+            className="intro-fase__btn-estudar"
+            onClick={(e) => { e.stopPropagation(); setModalEstudoVisivel(true); }}
+            id="btn-abrir-estudo"
+          >
+            📖 Estudar
+          </button>
+
+          <button
             id="btn-avancar-dialogo"
             className="intro-fase__btn-avancar"
             onClick={(e) => { e.stopPropagation(); avancar(); }}
@@ -119,18 +140,19 @@ export default function IntroFase() {
             {digitando
               ? 'Pular ›'
               : isUltimoDialogo
-              ? '⚔️ Iniciar Batalha!'
+              ? '⚔️ Batalha!'
               : 'Próximo ›'}
-          </button>
-          <button
-            className="intro-fase__btn-voltar"
-            onClick={(e) => { e.stopPropagation(); irParaMapa(); }}
-            id="btn-voltar-mapa"
-          >
-            ← Mapa
           </button>
         </div>
       </div>
+
+      {/* Modal de Estudo */}
+      <ModalEstudo 
+        fase={fase}
+        conteudo={CONTEUDO_ESTUDO[fase.id] || CONTEUDO_ESTUDO[1]} 
+        visivel={modalEstudoVisivel}
+        aoFechar={() => setModalEstudoVisivel(false)}
+      />
     </div>
   );
 }

@@ -195,6 +195,7 @@
   padding: var(--esp-3) var(--esp-4);
   border-top: 1px solid rgba(255,255,255,0.06);
   gap: var(--esp-3);
+  flex-wrap: wrap; /* Permite quebra de linha no mobile */
 }
 
 .intro-fase__btn-avancar {
@@ -238,6 +239,28 @@
   border-color: rgba(255,255,255,0.25);
 }
 
+.intro-fase__btn-estudar {
+  flex: 1;
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  color: #fff;
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  letter-spacing: 0.05em;
+  padding: var(--esp-3) var(--esp-4);
+  border: 2px solid #64b5f6;
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: all var(--trans-base);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.intro-fase__btn-estudar:hover {
+  background: linear-gradient(135deg, #2196f3, #64b5f6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.4);
+}
+
 /* ── Responsividade Mobile (< 768px) ── */
 @media (max-width: 768px) {
   .intro-fase {
@@ -247,14 +270,14 @@
     padding: var(--esp-3);
     font-size: var(--texto-sm);
   }
-  .intro-fase__btn-avancar, .intro-fase__btn-voltar {
+  .intro-fase__btn-avancar, .intro-fase__btn-voltar, .intro-fase__btn-estudar {
     padding: var(--esp-2) var(--esp-4);
     font-size: var(--texto-sm);
+    width: 100%;
+    flex: none;
   }
   .intro-fase__dialogo-rodape {
     flex-direction: column;
-  }
-  .intro-fase__btn-voltar {
-    width: 100%;
+    gap: var(--esp-2);
   }
 }
