@@ -9,6 +9,9 @@ import ComoJogar   from './pages/ComoJogar';
 import VitoriaFinal from './pages/VitoriaFinal';
 import ConquistaPopup from './components/ConquistaPopup';
 
+import { SoundProvider } from './context/SoundContext';
+import GlobalAudioControls from './components/GlobalAudioControls';
+
 /* Roteador baseado no estado do jogo */
 function Roteador() {
   const { estado } = useGame();
@@ -27,9 +30,12 @@ function Roteador() {
 
 export default function App() {
   return (
-    <GameProvider>
-      <Roteador />
-      <ConquistaPopup />
-    </GameProvider>
+    <SoundProvider>
+      <GameProvider>
+        <GlobalAudioControls />
+        <Roteador />
+        <ConquistaPopup />
+      </GameProvider>
+    </SoundProvider>
   );
 }

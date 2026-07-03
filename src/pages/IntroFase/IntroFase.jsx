@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import useSound from 'use-sound';
 import './IntroFase.css';
 import { useGame } from '../../context/GameContext';
+import { useSoundContext } from '../../context/SoundContext';
 import { getFase } from '../../utils/configFases';
 
 /**
@@ -10,6 +12,7 @@ import { getFase } from '../../utils/configFases';
 export default function IntroFase() {
   const { estado, iniciarCombate, irParaMapa } = useGame();
   const fase = getFase(estado.faseAtual);
+  const { setDucking } = useSoundContext();
 
   const [passoDialogo, setPassoDialogo] = useState(0);
   const [textoExibido, setTextoExibido] = useState('');

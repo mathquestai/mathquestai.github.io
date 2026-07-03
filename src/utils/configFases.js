@@ -40,6 +40,7 @@ export const FASES = [
 
     // Cenário
     imagemFundo: imgPlanicies,
+    bgm: '/sounds/bgm_fase1.ogg',
 
     // Mecânica
     dificuldade:    1,   // multiplicação básica (2-9)
@@ -87,6 +88,7 @@ export const FASES = [
     vidaHeroi: 100,
 
     imagemFundo: imgPicos,
+    bgm: '/sounds/bgm_fase2.ogg',
 
     dificuldade:    2,   // divisão básica (resultados inteiros)
     totalPerguntas: 12,
@@ -131,6 +133,7 @@ export const FASES = [
     vidaHeroi: 100,
 
     imagemFundo: imgVulcao,
+    bgm: '/sounds/bgm_fase3.ogg',
 
     dificuldade:    3,   // mix: multiplicação e divisão, até 20
     totalPerguntas: 14,
@@ -175,6 +178,7 @@ export const FASES = [
     vidaHeroi: 100,
 
     imagemFundo: imgAbismo,
+    bgm: '/sounds/bgm_fase4.mp3',
 
     dificuldade:    4,   // operandos maiores (até 50)
     totalPerguntas: 16,
@@ -219,6 +223,7 @@ export const FASES = [
     vidaHeroi: 100,
 
     imagemFundo: imgCastelo,
+    bgm: '/sounds/bgm_fase5.mp3',
 
     dificuldade:    5,   // todos os tipos, operandos até 99
     totalPerguntas: 20,

@@ -1,10 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
+import useSound from 'use-sound';
 import './CombatePage.css';
 import {
   BattleStage, ExibicaoQuestao, InputResposta,
   BolhaDica, BotaoPedirDica, TimerCombate,
 } from '../../components';
 import { useGame } from '../../context/GameContext';
+import { useSoundContext } from '../../context/SoundContext';
 import { getFase, TOTAL_FASES } from '../../utils/configFases';
 import { gerarLoteQuestoes } from '../../utils/geradorQuestoes';
 import { validarResposta } from '../../utils/validadorResposta';
@@ -164,6 +166,8 @@ export default function CombatePage() {
 
   const fase = getFase(estado.faseAtual);
 
+  const { playCorrect, playWrong } = useSoundContext();
+
   /* ── Estado local ── */
   // Pré-gera lote de questões únicas para a fase inteira
   const [loteQuestoes,   setLoteQuestoes]   = useState(() => gerarLoteQuestoes(fase.dificuldade, fase.totalPerguntas));
@@ -212,6 +216,7 @@ export default function CombatePage() {
     const correta = validarResposta(valor, questao.resposta);
 
     if (correta) {
+      playCorrect();
       acertar();
       setStatusResposta('correta');
       setMsgFeedback(mensagemAcerto());
@@ -221,6 +226,7 @@ export default function CombatePage() {
         gerarNovaQuestao();
       }, 1600);
     } else {
+      playWrong();
       errar();
       setStatusResposta('errada');
       setMsgFeedback(mensagemErro());
