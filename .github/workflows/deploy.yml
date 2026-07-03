@@ -5,12 +5,22 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-# Necessário para que o GitHub Actions tenha permissão de gravar na branch gh-pages
+# Permissões necessárias para usar o GitHub Actions para fazer deploy direto no Pages
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# Permite apenas um deploy simultâneo
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do Repositório
@@ -25,16 +35,17 @@ jobs:
       - name: Instalar Dependências
         run: npm install
 
-      - name: Build & Deploy Automático
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Configura um usuário bot do GitHub para fazer o commit
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Autentica o repositório usando o token do Actions para que o pacote gh-pages consiga fazer push
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          
-          # Executa o script que você já configurou (faz o build e joga pra gh-pages)
-          npm run deploy
+      - name: Build do Projeto (Vite)
+        run: npm run build
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload do Artefato
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: Deploy no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
